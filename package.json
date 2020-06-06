@@ -1,0 +1,8 @@
+{
+  "name": "study-in-device-orientation-and-motion",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:mp3/study-in-device-orientation-and-motion.git",
+  "author": "mp3 <im.in.a.coma.xxx@gmail.com>",
+  "license": "MIT"
+}
