@@ -79,9 +79,9 @@ const Main = () => {
       <div>{`gamma: ${orientation.gamma}`}</div>
 
       <h2>devicemotion</h2>
-      <div>{`acceleration: ${motion.acceleration}`}</div>
-      <div>{`accelerationIncludingGravity: ${motion.accelerationIncludingGravity}`}</div>
-      <div>{`rotationRate: ${motion.rotationRate}`}</div>
+      <div>{`acceleration: ${JSON.stringify(motion.acceleration)}`}</div>
+      <div>{`accelerationIncludingGravity: ${JSON.stringify(motion.accelerationIncludingGravity)}`}</div>
+      <div>{`rotationRate: ${JSON.stringify(motion.rotationRate)}`}</div>
       <div>{`interval: ${motion.interval}`}</div>
     </div>
   )
