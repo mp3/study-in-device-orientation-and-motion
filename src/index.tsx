@@ -1,11 +1,19 @@
 import { h, render } from 'preact'
 import { useState } from 'preact/hooks'
+import { throttle } from 'lodash-es'
 
 type Orientation = {
   absolute: boolean
   alpha: number | null
   beta: number | null
   gamma: number | null
+}
+
+type Motion = {
+  acceleration: DeviceMotionEventAcceleration | null
+  accelerationIncludingGravity: DeviceMotionEventAcceleration | null
+  rotationRate: DeviceMotionEventRotationRate | null
+  interval: number
 }
 
 const Main = () => {
@@ -16,11 +24,25 @@ const Main = () => {
     gamma: 0
   })
 
+  const [motion, setMotion] = useState<Motion>({
+    acceleration: null,
+    accelerationIncludingGravity: null,
+    rotationRate: null,
+    interval: 0
+  })
+
   const requestPermission = () => {
     DeviceOrientationEvent.requestPermission()
       .then((response) => {
         if (response === 'granted') {
-          window.addEventListener('deviceorientation', handleOrientation, true)
+          window.addEventListener('deviceorientation', throttle(handleOrientation, 16), true)
+        }
+      })
+
+    DeviceMotionEvent.requestPermission()
+      .then((response) => {
+        if (response === 'granted') {
+          window.addEventListener('devicemotion', throttle(handleMotion, 16), true)
         }
       })
   }
@@ -36,6 +58,17 @@ const Main = () => {
     })
   }
 
+  const handleMotion = (event: DeviceMotionEvent) => {
+    const { acceleration, accelerationIncludingGravity, rotationRate, interval } = event
+
+    setMotion({
+      acceleration,
+      accelerationIncludingGravity,
+      rotationRate,
+      interval
+    })
+  }
+
   return (
     <div>
       <button onClick={requestPermission}>request permission</button>
@@ -44,6 +77,12 @@ const Main = () => {
       <div>{`alpha: ${orientation.alpha}`}</div>
       <div>{`beta: ${orientation.beta}`}</div>
       <div>{`gamma: ${orientation.gamma}`}</div>
+
+      <h2>devicemotion</h2>
+      <div>{`acceleration: ${motion.acceleration}`}</div>
+      <div>{`accelerationIncludingGravity: ${motion.accelerationIncludingGravity}`}</div>
+      <div>{`rotationRate: ${motion.rotationRate}`}</div>
+      <div>{`interval: ${motion.interval}`}</div>
     </div>
   )
 }
