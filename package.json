@@ -6,7 +6,7 @@
   "author": "mp3 <im.in.a.coma.xxx@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dev-server --host 0.0.0.0",
     "build": "webpack --mode production",
     "typecheck": "tsc -p . --noEmit",
     "deploy": "netlify deploy -d dist --prod"
