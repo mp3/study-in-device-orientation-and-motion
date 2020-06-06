@@ -19,6 +19,7 @@
   "devDependencies": {
     "@types/lodash-es": "^4.17.3",
     "@types/styled-components": "^5.1.0",
+    "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
     "netlify-cli": "^2.53.0",
     "ts-loader": "^7.0.5",
