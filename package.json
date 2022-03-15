@@ -12,7 +12,7 @@
     "deploy": "netlify deploy -d dist --prod"
   },
   "dependencies": {
-    "lodash-es": "^4.17.15",
+    "lodash-es": "^4.17.21",
     "preact": "^10.4.4",
     "styled-components": "^5.1.1"
   },
